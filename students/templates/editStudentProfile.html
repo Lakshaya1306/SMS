@@ -1,0 +1,143 @@
+{% extends "HomeBase.html" %} 
+{% load static %} 
+
+     {% block title %} 
+       Edit Profile
+     {% endblock %} 
+
+     {% block styling %}
+       <link rel="stylesheet" href="{% static 'editProfile.css'%}" />
+     {% endblock %} 
+     
+     {% block content %}
+<!-- Edit Profile Form -->
+<div class="container">
+  <div class="card">
+    <h5 class="text-center mb-4">Edit Student Profile</h5>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            value="{{firstName}}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            value="{{lastName}}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            value="{{email}}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Father's Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fatherName"
+            value="{{fatherName}}"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Mother's Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motherName"
+            value="{{motherName}}"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Contact Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="contact"
+            value="{{contact}}"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" name="address" rows="3">
+ {{address}}</textarea
+          >
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input type="text" name="dob" class="form-control" value="{{dob}}" />
+        </div>
+        <div class = "row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Year of Studying</label>
+          <input type="text" name="yos" class="form-control" value="{{yos}}" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Semester</label>
+          <input type="text" name="semester" class="form-control" value="{{semester}}" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Branch</label>
+          <input
+            type="text"
+            name="branch"
+            class="form-control"
+            value="{{branch}}"
+          />
+        </div>
+      </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Active</label>
+        <input
+          type="text"
+          name="active"
+          class="form-control"
+          value="{{active}}"
+        />
+      </div>
+      <div class = "button-row">
+      <div class="mt-4 text-end">
+        <button
+          type="submit"
+          class="btn delete-user-btn px4"
+          name="action"
+          value="delete"
+          onClick="return confirm('Are you sure you want to delete this user')"
+        >
+          Delete user
+        </button>
+      </div>
+      <div class="mt-4 text-end">
+        <button
+          type="submit"
+          class="btn btn-success btn-save px-4"
+          name="action"
+          value="save"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

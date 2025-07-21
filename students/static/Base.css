@@ -1,0 +1,105 @@
+body {
+  background-color: #f2f2f2; /* Very light grey */
+  margin: 0;
+}
+
+.navbar {
+  background-color: #2b6777; /* Bright + dark navbar */
+  min-height: 80px; /* Increased height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+  color: #ffffff !important; /* Make navbar links white */
+  font-weight: 500;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Highlight the active nav link */
+.nav-linkactive {
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.15); /* Light transparent white */
+  color: #ffffff; /* Keep text white for contrast */
+  border-radius: 6px;
+  padding: 6px 12px;
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Add hover effect */
+.nav-link:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.15
+  ) !important; /* light blue background */
+  border-radius: 5px !important;
+  transition: background-color 0.3s !important;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.admin-center {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: 1px;
+  /* Light contrast */
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for profile image and dropdown */
+.profile-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Profile icon inside wrapper */
+.profile-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 45px; /* Adjust based on profile-img size */
+  right: 0;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 999;
+  padding: 8px 0;
+}
+
+/* Show dropdown on hover */
+.profile-wrapper:hover .dropdown-menu {
+  display: block;
+}
+
+/* Style for dropdown links */
+.dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  color: #2b6777;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f2f2f2;
+}

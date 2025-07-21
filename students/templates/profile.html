@@ -1,0 +1,67 @@
+{% extends "HomeBase.html" %}
+{% load static %} 
+{% block title %} Student Profile {% endblock %} 
+{% block styling %} <link rel = "stylesheet" href = "{%static 'Profile.css'%}"/> {% endblock %} 
+ {% block content %}
+<!-- Profile Content -->
+<div class="container">
+  <div class="card">
+    <h5 class="text-center mb-4">Student Profile</h5>
+
+    <div class="row">
+      <div class="col-md-6 info-row">
+        <div class="label">First Name</div>
+        <div class="value">{{ studentData.firstName }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Last Name</div>
+        <div class="value">{{ studentData.lastName }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Email</div>
+        <div class="value">{{ studentData.email }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Date of Birth</div>
+        <div class="value">{{ studentData.dob }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Father's Name</div>
+        <div class="value">{{ studentData.fatherName }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Mother's Name</div>
+        <div class="value">{{ studentData.motherName }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Contact Number</div>
+        <div class="value">{{ studentData.contact }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Address</div>
+        <div class="value">{{ studentData.address }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Year of Studying</div>
+        <div class="value">{{ studentData.yos }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Semester</div>
+        <div class="value">{{ studentData.semester }}</div>
+      </div>
+      <div class="col-md-6 info-row">
+        <div class="label">Branch</div>
+        <div class="value">{{ studentData.branch }}</div>
+      </div>
+    </div>
+
+    <!-- Edit Button Bottom-Right -->
+    <div class="d-flex justify-content-between mt-4">
+      <a href="{% url 'home' %}" class="btn btn-secondary px-4"> ← Back </a>
+      <a href="{% url 'edit details' %}" class="btn btn-primary px-4">
+        Edit Profile
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

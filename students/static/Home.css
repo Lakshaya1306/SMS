@@ -1,0 +1,107 @@
+.message-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+
+/* Base alert styling */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Bootstrap-style message classes */
+.alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.card-custom {
+  border-radius: 1rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.card-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: right;
+  color: #5a5a5a;
+}
+
+#details-card.expanded {
+  transform: scale(0.8);
+}
+
+#details-card .profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-top: -60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+#details-card .card-body {
+  padding-top: 3rem;
+}
+
+#details-card h4,
+#details-card h6 {
+  margin: 0;
+  padding: 0;
+}
+
+#details-card h4 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #2b6777;
+}
+
+#details-card h6 {
+  color: #2b6777;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+#stat-cards {
+  transition: opacity 0.6s ease-in-out;
+}
+
+#live-datetime {
+  font-weight: 500;
+  font-size: 14px;
+  color: #2b6777;
+}
+
+#user-greeting-wrapper {
+  color: #2b6777;
+  font-size: 1rem;
+}
+
+/* Center the row vertically and horizontally */
+.admin-stats-row {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+/* Hide cards initially */
+.admin-stat-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  width: 281px;
+  height: 103px;
+}
+
+.admin-label {
+  text-align: left;
+}

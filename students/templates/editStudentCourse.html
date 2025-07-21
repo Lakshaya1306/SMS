@@ -1,0 +1,60 @@
+{% extends "HomeBase.html" %} 
+{% load static %} 
+
+{% block title %} Edit Course {%endblock %} 
+
+{% block styling %}
+<link rel="stylesheet" href="{% static 'editStudentCourse.css' %}?v=1" />
+{% endblock %} 
+
+{% block content %}
+<form class="status-form" method="POST">
+    {% if messages %}
+    <div class="message-container", id = "message-container">
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <script>
+    setTimeout(function () {
+      const msgBox = document.getElementById("message-container");
+      if (msgBox) msgBox.style.display = "none";
+    }, 3000); // 3 seconds
+  </script>
+  
+  {% endif %}
+<div class="course-container">
+  {% for course in courseData %}
+  <div class="course-card">
+    <div class="course-field">
+      <span class="field-label">Course Name:</span>
+      <span class="field-value">{{ course.name }}</span>
+    </div>
+    <div class="course-field">
+      <span class="field-label">Department:</span>
+      <span class="field-value">{{ course.department }}</span>
+    </div>
+    <div class="course-field">
+      <span class="field-label">HOD:</span>
+      <span class="field-value">{{ course.HOD }}</span>
+    </div>
+    <div class="course-field">
+      <span class="field-label">Status: </span>
+        {% csrf_token %}
+        <input
+          type="text"
+          name="status_{{ course.id }}"
+          value="{{ course.status }}"
+          class="status-input"
+        />
+    </div>
+</div>
+{% endfor %}
+
+<button type = "submit" class = "btn btn-success btn-save px-4" > Save </button>
+</form>
+</div>
+{% endblock %}

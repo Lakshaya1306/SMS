@@ -1,0 +1,63 @@
+{% extends "HomeBase.html"%}
+{% load static %}
+    {% block title %} 
+       Courses 
+    {% endblock %}
+
+    {% block styling %} 
+       <link rel = "stylesheet" href = "{% static 'courseList.css'%}?v=2" /> 
+    {% endblock %}
+
+    {% block content %}
+      <div class="search-wrapper">
+         <form method="get" >
+          <input type="search" name="search" placeholder="Search..." value="{{ request.GET.search }}">
+          <button type="submit"> Search </button>
+         </form>
+      </div>
+      <div class="courses-container">
+        {% for course in courseQs %}
+           <div class="course-card">
+      
+      <!-- Top Row: Course ID & Name -->
+      <div class="top-row">
+        <span class="label">Course ID:</span><span class="value" style = "color:#5a5a5a;">{{ course.id }}</span>
+        &nbsp;&nbsp;
+        <span class="label">Name:</span><span class="value" style = "color:#5a5a5a;">{{ course.name }}</span>
+      </div>
+
+      <!-- Middle Row: Dept and HOD (in separate lines) -->
+      <div class="middle-row">
+        <div class="line">
+          <span class="label">Dept:</span><span class="value" style = "color:#5a5a5a;">{{ course.department }}</span>
+        </div>
+        <div class="line">
+          <span class="label">HOD:</span><span class="value" style = "color:#5a5a5a;">{{ course.HOD }}</span>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Students and Edit -->
+      <div class="bottom-row">
+        <div>
+          <span class="label">Students:</span><span class="value" style = "color:#5a5a5a;">{{ course.enrolled_students }}</span>
+        </div>
+        <button class="edit-btn" type="button" onClick = "window.location.href = '{% url "edit course" course.id %}'">Edit</button>
+      </div>
+    </div>
+        {% endfor %}
+       </div>
+    
+    <div class="pagination-wrapper">
+      {% if courseQs.has_previous %}
+         <a href = "?page={{courseQs.previous_page_number}}" class="page-btn">⟨</a>
+      {% endif %}
+
+       {% for i in courseQs.paginator.page_range %}
+          <a href="?page={{i}}" class="page-btn {% if courseQs.number == i %}active{% endif %}">{{ i }}</a>
+       {% endfor %}
+
+      {% if courseQs.has_next %}
+         <a href = "?page={{courseQs.next_page_number}}" class="page-btn">⟩</a>
+      {% endif %}
+    </div>
+    {% endblock %}

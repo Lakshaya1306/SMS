@@ -1,0 +1,85 @@
+.students-container {
+  max-width: 95vw;
+  margin: auto;
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.student-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: rgb(90, 90, 90);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  width: 98%;
+}
+
+.student-card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.student-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 0.8fr 0.8fr auto auto;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  align-items: center;
+}
+
+.student-info-grid div {
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.student-info-grid div.centered {
+  align-items: center;
+}
+
+.student-info-grid div span {
+  display: block;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.editButton {
+  padding: 8px 10px;
+  background-color: #2b6777;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.editButton:hover {
+  transform: scale(1.05);
+  background-color: #1d4d5d;
+}
+
+.total-students {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 999;
+}

@@ -1,0 +1,76 @@
+{% extends "HomeBase.html" %}
+{% load static %}
+
+{% block title %} My Courses {% endblock %}
+
+{% block styling %} 
+  <link rel="stylesheet" href="{% static 'myCourses.css' %}?v=1" />
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center px-2 mb-3">
+      <h3 class="mb-0">My Courses</h3>
+      <select id="statusFilter" class="form-select w-auto status-filter" onchange="filterTable()">
+        <option value="All">All</option>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Pass">Pass</option>
+        <option value="Fail">Fail</option>
+      </select>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered custom-table">
+      <thead class="table-header">
+        <tr>
+          <th>Course Name</th>
+          <th>Department</th>
+          <th>HOD</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courseData %}
+          <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.department }}</td>
+            <td>{{ course.HOD }}</td>
+            <td class = "status-cell 
+            {% if course.status == 'PASS' %}status-pass 
+            {% elif course.status == 'ONGOING'%}status-ongoing
+            {% elif course.status == 'FAIL'%}status-fail 
+            {% endif %}"> 
+            {{ course.status }} </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" class="text-center">No courses available.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function filterTable() {
+    const selectedStatus = document.getElementById("statusFilter").value;
+
+    // Get current URL
+    const url = new URL(window.location.href);
+
+    // Set or update the 'filter' query param
+    url.searchParams.set("filter", selectedStatus);
+
+    // Redirect with new URL
+    window.location.href = url.toString();
+  }
+
+  // Optional: retain selected value on reload
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    const selected = params.get("filter") || "All";
+    document.getElementById("statusFilter").value = selected;
+  };
+</script>
+
+{% endblock %}

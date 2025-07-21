@@ -1,0 +1,76 @@
+.container {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 18px; /* Increased font size */
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  table-layout: fixed; /* Better column spacing */
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 20px 24px; /* Increased padding */
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  word-wrap: break-word;
+}
+
+.table-header {
+  background-color: #3a3a3a; /* dark greyish */
+  color: #fff;
+}
+
+.custom-table tbody tr {
+  background-color: #f5f5f5; /* light greyish */
+}
+
+.custom-table tbody tr:hover {
+  background-color: #e5e5e5;
+  transition: background-color 0.3s ease;
+}
+
+h3 {
+  font-weight: 600;
+  color: #333;
+  font-size: 24px;
+}
+
+.heading-row {
+  padding: 0 1rem;
+}
+
+.status-filter {
+  min-width: 120px;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-filter:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.status-pass {
+  color: #28a745 !important;
+  font-weight: bold;
+}
+
+.status-ongoing {
+  color: #f4b400 !important;
+  font-weight: bold;
+}
+
+.status-fail {
+  color: crimson !important;
+  font-weight: bold;
+}

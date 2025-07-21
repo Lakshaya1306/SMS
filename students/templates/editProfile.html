@@ -1,0 +1,137 @@
+{% extends "HomeBase.html" %} 
+  {% load static %} 
+
+  {% block title %} 
+    Edit Profile
+  {% endblock %} 
+
+  {% block styling %} 
+    <link rel = "stylesheet" href = "{% static 'editProfile.css'%}"/> 
+  {% endblock %}
+  
+ {% block content %}
+<!-- Edit Profile Form -->
+<div class="container">
+  <div class="card">
+    <h5 class="text-center mb-4">Edit Student Profile</h5>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            value="{{ studentData.firstName }}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            value="{{ studentData.lastName }}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            value="{{ studentData.email }}"
+            required
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Father's Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fatherName"
+            value="{{ studentData.fatherName }}"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Mother's Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motherName"
+            value="{{ studentData.motherName }}"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Contact Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="contact"
+            value="{{ studentData.contact }}"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" name="address" rows="3">{{studentData.address}}</textarea
+          >
+        </div>
+
+        <!-- Readonly Fields (Greyed Out) -->
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input
+            type="text"
+            class="form-control bg-light"
+            value="{{ studentData.dob }}"
+            readonly
+          />
+        </div>
+        <div class = "row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Year of Studying</label>
+          <input
+            type="text"
+            class="form-control bg-light"
+            value="{{ studentData.yos }}"
+            readonly
+          />
+        </div>
+          <div class="col-md-4 mb-3">
+          <label class="form-label">Semester</label>
+          <input
+            type="text"
+            class="form-control bg-light"
+            value="{{ studentData.semester }}"
+            readonly
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Branch</label>
+          <input
+            type="text"
+            class="form-control bg-light"
+            value="{{ studentData.branch }}"
+            readonly
+          />
+        </div>
+      </div>
+      <div class = "button-row">
+        <div class = "mt-4 text-end">
+          <button type = "button" onClick = "window.location.href = '{% url "change password" %}'">Change Password</button>
+        </div>
+        <div class="mt-4 text-end">
+          <button type="submit" class="btn btn-success btn-save px-4">
+          Save Changes
+        </button>
+      </div>
+    </div>
+    </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

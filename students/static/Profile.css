@@ -1,0 +1,23 @@
+.card {
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.card h5 {
+  font-weight: 600;
+}
+
+.info-row {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: 500;
+  color: #555;
+}
+
+.value {
+  color: #143;
+}

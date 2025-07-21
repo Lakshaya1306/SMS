@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %} Demo Title {% endblock %}</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel = "stylesheet" href = "{% static "Base.css"%}?v=1"/> 
+    {% block styling %} {% endblock %}
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a
+              class="nav-link{% if request.path == '/student/home/'%}active{% endif %}"
+              href="{% url 'home' %}"
+              >Home</a
+            >
+          </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item">
+            <a
+              class="nav-link{% if request.path == '/student/students_list/'%}active{% endif %}"
+              href="{% url 'students list' %}"
+              >Students</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link{% if request.path == '/student/courses/' %}active{% endif %}"
+              href="{% url 'courses'%}"
+              >Courses
+            </a>
+          </li>
+          {% endif %} {% if not request.user.is_superuser %}
+          <li class="nav-item">
+            <a
+              class="nav-link{% if request.path == '/student/mycourses/'%}active{% endif %}"
+              href="{% url 'my courses' %}"
+              >My Courses</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {% if request.user.is_superuser %}
+      <div class="admin-center">ADMIN</div>
+      {% endif %}
+
+      <div class="profile-wrapper">
+        <div class="profile-icon">
+          <img
+            src="{% static 'images/user_profile.png' %}"
+            alt="Profile"
+            class="profile-img"
+            onerror="this.onerror=null; this.src='https://via.placeholder.com/45'"
+          />
+        </div>
+        <div class="dropdown-menu">
+          <a href="{% url 'student profile' %}">Profile Overview</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+    </nav>
+    {% block content %} {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

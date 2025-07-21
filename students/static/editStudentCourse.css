@@ -1,0 +1,124 @@
+/* Main container */
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Individual course card */
+.course-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.course-card:hover {
+  transform: scale(1.02);
+}
+
+/* Course detail rows */
+.course-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.course-field:last-child {
+  border-bottom: none;
+}
+
+/* Label styling */
+.field-label {
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Value styling */
+.field-value {
+  color: #1f2937;
+  font-size: 1rem;
+}
+
+/* Form input */
+.status-form {
+  margin: 0;
+  width: 100%;
+  position: relative; /* for absolute positioning inside */
+}
+
+/* Input field */
+.status-input {
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.btn-save {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1); /* ensure consistent base state */
+}
+
+.btn-save:hover {
+  transform: translateY(-2px) scale(1.03); /* lift + scale */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* deeper shadow */
+}
+
+/* Optional: Prevent Save button from overlapping course cards */
+.status-form::after {
+  content: "";
+  display: block;
+  height: 60px;
+}
+
+.message-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+
+/* Base alert styling */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Bootstrap-style message classes */
+.alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.alert-info {
+  background-color: #cff4fc;
+  color: #055160;
+  border: 1px solid #b6effb;
+}

@@ -1,0 +1,56 @@
+{% extends "HomeBase.html" %} 
+{% load static %} 
+
+{% block title %} Students {% endblock %} 
+
+{% block styling %} 
+<link rel = "stylesheet" href = "{% static 'studentList.css' %}?v=1"/> 
+{% endblock %} 
+
+{% block content %}
+<div class="students-container">
+  {% for student in studentsData %}
+  <div class="student-card">
+    <div class="student-info-grid">
+      <div>
+        <span>First Name</span>
+        {{ student.firstName }}
+      </div>
+      <div>
+        <span>Last Name</span>
+        {{ student.lastName }}
+      </div>
+      <div>
+        <span>Email</span>
+        {{ student.email }}
+      </div>
+      <div>
+        <span>Branch</span>
+        {{ student.branch }}
+      </div>
+      <div class="centered">
+        <span>Year</span>
+        {{ student.yos }}
+      </div>
+      <div class="centered">
+        <span>Semester</span>
+        {{ student.semester }}
+      </div>
+      <div>
+        <form method="get" action="{% url 'edit profile' student.id %}">
+          <button class="editButton" type="submit">Edit Profile</button>
+        </form>
+      </div>
+      <div>
+        <form method="get" action="{% url 'edit student course' student.id%}">
+          <button class="editButton" type="submit">Edit Course</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="total-students">Total Students: {{ count }}</div>
+
+{% endblock %}

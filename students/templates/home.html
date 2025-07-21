@@ -1,0 +1,233 @@
+{% extends "HomeBase.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block styling %}
+<link rel="stylesheet" href="{% static 'Home.css' %}?v=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    <div class="message-container", id = "message-container">
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <script>
+    setTimeout(function () {
+      const msgBox = document.getElementById("message-container");
+      if (msgBox) msgBox.style.display = "none";
+    }, 3000); // 3 seconds
+  </script>
+  
+  {% endif %}
+  
+<div id="user-greeting-wrapper" 
+     class="position-fixed top-10 start-0 m-3 p-2 bg-light rounded shadow-sm fw-semibold"
+     style="z-index: 1050; white-space: nowrap; user-select: none;">
+  Hi <span id="user-firstname">{{ firstName }}</span> 👋
+</div>
+
+<div class="container mt-5">
+
+  {% if not request.user.is_superuser %}
+  <!-- Main Profile Card -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-6 col-lg-4">
+      <div id="details-card" class="card card-custom shadow text-center p-3" style="cursor: pointer;">
+        <div class="bg-info rounded-top pt-4 pb-3" style = "background-color: #2b6777 !important ;">
+          <img src="{% static 'images/user_profile.png' %}" alt="Profile" class="profile-img mx-auto d-block">
+          <h4 class="mt-3 text-white">{{ request.user.get_full_name }}</h4>
+          <h6 class="fw-normal text-white">Student</h6>
+        </div>
+        <div class="card-body bg-white rounded-bottom">
+          <div class="row border-top pt-3">
+            <div class="col text-center">
+              <div class="fw-bold text-nowrap">{{ branch }}</div>
+              <small class="text-dark" style = "font-weight:bold !important;">Branch</small>
+            </div>
+            <div class="col text-center">
+              <div class="fw-bold">{{ year }}</div>
+              <small class="text-dark" style = "font-weight:bold !important;">Year</small>
+            </div>
+            <div class="col text-center">
+              <div class="fw-bold">{{ semester }}</div>
+              <small class="text-dark" style = "font-weight:bold !important;">Semester</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden stat cards -->
+  <div id="stat-cards" class="row g-4 justify-content-center d-none opacity-0 animate__animated animate__fadeInUp">
+    <div class="col-md-4">
+      <div class="card card-custom shadow text-center p-3">
+        <h5 class="mb-2">Active Courses</h5>
+        <div class="card-value" data-target="{{ activeCount }}">0</div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-custom shadow text-center p-3">
+        <h5 class="mb-2">Courses Passed</h5>
+        <div class="card-value" data-target="{{ passCount }}">0</div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-custom shadow text-center p-3">
+        <h5 class="mb-2">Failed Courses</h5>
+        <div class="card-value" data-target="{{ failCount }}">0</div>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <!-- Superuser Stat Section -->
+  <div id="admin-stat-cards" class="row g-4 justify-content-center admin-stats-row">
+
+  <div class="col-md-3 d-flex justify-content-center">
+    <div class="card card-custom shadow text-center p-3 admin-stat-card">
+      <h5 class="admin-label">No. of Students</h5>
+      <div class="card-value" data-target="{{ studentCount }}">0</div>
+    </div>
+  </div>
+
+  <div class="col-md-3 d-flex justify-content-center">
+    <div class="card card-custom shadow text-center p-3 admin-stat-card">
+      <h5 class="admin-label">Departments</h5>
+      <div class="card-value" data-target="{{ deptCount }}">0</div>
+    </div>
+  </div>
+
+  <div class="col-md-3 d-flex justify-content-center">
+    <div class="card card-custom shadow text-center p-3 admin-stat-card">
+      <h5 class="admin-label">HODs</h5>
+      <div class="card-value" data-target="{{ hodCount }}">0</div>
+    </div>
+  </div>
+
+  <div class="col-md-3 d-flex justify-content-center">
+    <div class="card card-custom shadow text-center p-3 admin-stat-card">
+      <h5 class="admin-label">Courses</h5>
+      <div class="card-value" data-target="{{ courseCount }}">0</div>
+    </div>
+  </div>
+
+</div>
+
+  {% endif %}
+
+</div>
+
+<!-- Bottom-right Live Date-Time Display -->
+<div id="live-datetime"
+     class="position-fixed bottom-0 end-0 m-3 p-2 bg-light rounded shadow-sm"
+     style="z-index: 1050;">
+  <span id="date-part">{{ todayDate }}</span>,
+  <span id="time-part"></span>
+</div>
+
+<!-- Scripts -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Count-up animation for regular user cards
+    const counters = document.querySelectorAll('.card-value');
+    const duration = 1000;
+    const interval = 50;
+
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const increment = target / (duration / interval);
+
+      const updateCount = () => {
+        count += increment;
+        if (count < target) {
+          counter.innerText = Math.floor(count);
+          setTimeout(updateCount, interval);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      updateCount();
+    });
+
+    // Live Time
+    function updateLiveTime() {
+      const timeEl = document.getElementById("time-part");
+      const now = new Date();
+      const hrs = now.getHours().toString().padStart(2, '0');
+      const mins = now.getMinutes().toString().padStart(2, '0');
+      const secs = now.getSeconds().toString().padStart(2, '0');
+      timeEl.innerText = `${hrs}:${mins}:${secs}`;
+    }
+
+    updateLiveTime();
+    setInterval(updateLiveTime, 1000);
+
+    // Show stat cards for regular users
+    const statCards = document.getElementById("stat-cards");
+    if (statCards) {
+      setTimeout(() => {
+        statCards.classList.remove("d-none", "opacity-0");
+        statCards.classList.add("animate__fadeInUp");
+      }, 300);
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Count-up animation for admin cards
+    const adminSection = document.getElementById("admin-stat-section");
+    if (adminSection) {
+      const adminCounters = adminSection.querySelectorAll('.admin-card-value');
+      const duration = 1000;
+      const interval = 50;
+
+      adminCounters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const increment = target / (duration / interval);
+
+        const updateCount = () => {
+          count += increment;
+          if (count < target) {
+            counter.innerText = Math.floor(count);
+            setTimeout(updateCount, interval);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        updateCount();
+      });
+
+      setTimeout(() => {
+        adminSection.classList.remove("d-none", "opacity-0");
+        adminSection.classList.add("animate__fadeInUp");
+      }, 300);
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".admin-stat-card");
+
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      }, index * 300); // 300ms delay between each card
+    });
+  });
+
+</script>
+{% endblock %}
