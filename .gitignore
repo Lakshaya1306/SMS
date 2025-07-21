@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+*.pyc
+*.log
+
+# Environments
+.env
+venv/
+env/
+ENV/
+.venv/
+.ISMS_env/  # ← your actual environment folder
+
+# VSCode / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+/media/
+/staticfiles/
+/migrations/
+
+# MacOS/Linux/Windows system files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
